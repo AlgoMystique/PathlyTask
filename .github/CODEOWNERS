@@ -1,0 +1,8 @@
+# Global code owners - require review from team leader and AI for all changes
+# At least 1 approval required for merge
+
+# All files require review from team leader
+* @team-leader
+
+# Additional AI reviewer (GitHub Copilot or similar AI code review tool)
+# This can be configured in GitHub settings to include AI-powered code review
