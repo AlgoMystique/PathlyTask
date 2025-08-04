@@ -1,0 +1,46 @@
+name: Code Review Requirements
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check-review-requirements:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR Requirements
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { context } = require('@actions/github');
+            
+            // This workflow ensures that PR review requirements are met
+            // The actual enforcement is done through branch protection rules
+            
+            core.info('✅ PR Code Review Requirements:');
+            core.info('1. At least 1 code reviewer approval required');
+            core.info('2. Team leader and AI review recommended');
+            core.info('3. Use the PR template for consistent reviews');
+            
+            // Check if PR uses the template (basic check)
+            const pr = context.payload.pull_request;
+            if (pr.body && pr.body.includes('Code Review Checklist')) {
+              core.info('✅ PR template appears to be used');
+            } else {
+              core.warning('⚠️ Consider using the PR template for better code review process');
+            }
+
+  ai-code-review-ready:
+    runs-on: ubuntu-latest
+    steps:
+      - name: AI Code Review Status
+        run: |
+          echo "🤖 This PR is ready for AI code review"
+          echo "📋 Review checklist items:"
+          echo "- Code quality and standards"
+          echo "- Security considerations" 
+          echo "- Performance implications"
+          echo "- Documentation completeness"
+          echo "- Error handling"
+          echo ""
+          echo "✅ Human reviewer approval still required for merge"
